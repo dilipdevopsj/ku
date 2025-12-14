@@ -1,18 +1,22 @@
-def call() {
+def checkoutCode() {
     git branch: 'dev',
         credentialsId: '047e0051-21a4-419a-8217-f8c646580ad9',
         url: 'https://github.com/dilipdevopsj/we.git'
 }
-def call() {
+
+def build() {
     sh 'mvn clean package'
 }
-def call() {
+
+def sonar() {
     sh 'mvn sonar:sonar'
 }
-def call() {
+
+def nexus() {
     sh 'mvn deploy'
 }
-def call() {
+
+def deployTomcat() {
     sh """
         curl -u sai:dd \
         --upload-file target/maven-web-application.war \
